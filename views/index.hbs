@@ -1,0 +1,42 @@
+<h1>Google Chrome Desktop notification</h1>
+<form method="post">
+	<input type="text" name="test">
+	<button onclick="notifyMe()" type="submit">Check notification</button>
+</form>
+<br>
+<script>
+//disini fungsi utama dari google chrome desktop notification
+//tentunya kita tidak perlu memakai React atau React native dari facebook
+//karena fungsi google chrome desktop notification sudah disediakan oleh google-chrome web browser
+
+
+//bagian ini kita mengecek apakah Browser kita adalah google chorme atau chromium
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (!Notification) {
+    alert('Desktop notifications not available in your browser. Try Chromium.'); 
+    return;
+  }
+
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+});
+
+function notifyMe() {
+  //disini kita membuat triger untuk memunculkan notifikasi
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+  else {
+    var notification = new Notification('Awesome JavaScript', {
+      icon: 'https://expressjs.com/images/favicon.png',
+      body: "hello {{test}} :)",
+    });
+
+    notification.onclick = function () {
+      window.open("https://expressjs.com");      
+    };
+
+  }
+
+}
+</script>
